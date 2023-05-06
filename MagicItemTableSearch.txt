@@ -1,0 +1,23 @@
+!alias MagicItemTableSearch embed 
+<drac2>
+#Define Vars
+#First arg is Table to search
+Table = "&1&".lower()
+
+# Determine how many rolls on your specified table
+diceStr = "1d4"
+if "a" in Table:
+    diceStr = "1d6"
+rolls = roll(diceStr)
+
+# Roll the items on the table
+D = f"Rolling {rolls} items on table {Table.upper()}\n"
+for i in range(rolls):
+    r = roll("1d100")
+    D += f"{r}\n"
+
+# Print Statements
+T = "Buying A Magic Item pt.2"
+</drac2>
+ -title "{{T}}"
+ -desc "{{D}}"

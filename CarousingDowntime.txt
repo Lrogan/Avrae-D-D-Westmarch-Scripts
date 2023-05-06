@@ -1,0 +1,41 @@
+!alias Carousing embed 
+<drac2>
+#Define Vars
+#First arg is flat mods, rest are dice mods
+args = &ARGS&
+Total = int(args[0])
+Mods = args[1:]
+D = ""
+
+# Roll the dice
+for i in range(len(Mods)):
+    Total += roll(str(Mods[i]))
+
+D += f"You rolled a {Total}\n\n"
+
+# Determine how many pieces of lore you get
+if Total > 20:
+    D += "You have made 3 Allied Contacts"
+elif Total > 15:
+    D += "You have made 2 Allied Contacts"
+elif Total > 10:
+    D += "You have made 1 Allied Contact"
+elif Total > 5:
+    D += "You have made 0 Allied Contacts"
+else:
+    D += "You have made 1 Hostile Contact"
+
+D += "\n\n"
+
+# Determine if the downtime has a complication  
+comp = roll("1d100")
+if comp > 10:
+    D += f"No Comp: {comp}\n\n"
+else:
+    D += f"Comp'd: {comp}\n\n"
+
+# Print Statements
+T = "Carousing"
+</drac2>
+ -title "{{T}}"
+ -desc "{{D}}"

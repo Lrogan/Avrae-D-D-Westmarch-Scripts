@@ -1,0 +1,63 @@
+!alias MagicItemSearch embed 
+<drac2>
+#Define Vars
+#First arg is Rarity Target, Second is flat mods, rest are dice mods
+args = &ARGS&
+rarity = args[0].lower()
+Total = args[1]
+Mods = args[2:]
+target = 0
+D = "\n"
+
+# Caclulate total from all possible mods
+for i in range(len(Mods)):
+    Total += roll(Mods[i])
+
+# Determine target DC
+if "uncommon" in rarity:
+    target = 15
+elif "common" in rarity:
+    target = 10
+elif "very" in rarity:
+    target = 25
+elif "rare" in rarity:
+    target = 20
+else:
+    target = 30
+
+# Determine if your item has a complication attached to it
+comp = roll("1d100")
+if comp > 10:
+    D += f"No Comp: {comp}\n\n"
+else:
+    D += f"Comp'd: {comp}\n\n"
+
+# Determine what tables you can roll on
+if target > 40:
+    D += "You can search on all tables!\n\n"
+elif target > 35:
+    D += "You can search on tables: A, B, C, D, E, F, G, H, and R!\n\n"
+elif target > 30:
+    D += "You can search on tables: A, B, C, D, E, F, G and R!\n\n"
+elif target > 25:
+    D += "You can search on tables: A, B, C, D, E, F and R!\n\n"
+elif target > 20:
+    D += "You can search on tables: A, B, C, D, E and R!\n\n"
+elif target > 15:
+    D += "You can search on tables: A, B, C, D and R!\n\n"
+elif target > 10:
+    D += "You can search on tables: A, B, C and R!\n\n"
+elif target > 5:
+    D += "You can search on tables: A, B and R!\n\n"
+elif target > 0:
+    D += "You can search on tables: A and R!\n\n"
+elif target == 0:
+    D += "You can search on table: R!\n\n"
+else:
+    D += "You can't search on any tables :(\n\n"
+
+# Print Statements
+T = "Buying A Magic Item"
+</drac2>
+ -title "{{T}}"
+ -desc "{{D}}"

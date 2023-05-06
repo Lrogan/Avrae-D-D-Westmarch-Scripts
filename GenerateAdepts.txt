@@ -1,0 +1,27 @@
+!alias GenerateAdepts embed 
+<drac2>
+#Define Vars
+Number = &1&
+Hires = []
+
+# Determine the stats and number of proficiencies for all the Hirelings to be Generated
+for i in range(Number):
+    s1 = roll("1d4") + 12
+    s2 = roll("1d4") + 11
+    s3 = 10 - roll("1d4")
+    profs = roll("1d3")
+    Hires.append([s1,s2,s3, profs])
+
+# Print Statements
+T = "Generated Adept Hirelings"
+D = ""
+
+# Format the hirelings into a more readable format
+for i in range(len(Hires)):
+    h = Hires[i]
+    D += f"Hireling {i+1}: \n\tSkill Values: {h[0]}, {h[1]}, {h[2]} \n\t# of Profs: {h[3]}\n\n"
+    
+D += "\n\n"
+</drac2>
+ -title "{{T}}"
+ -desc "{{D}}"
